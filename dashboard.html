@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ride A Pedal - Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Fonts -->
+  <link href="c:\Users\rachael repuesto\Downloads\church.jpg" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body{
+      min-height:100vh;
+      background: linear-gradient(to bottom, #e6b85c, #6b3e1f);
+      display:flex;
+      flex-direction:column;
+    }
+
+    /* NAVBAR */
+    .navbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:15px 50px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(255,255,255,0.3);
+    }
+
+    .logo{
+      font-size:22px;
+      font-weight:700;
+      color:white;
+    }
+
+    .nav-links{
+      list-style:none;
+      display:flex;
+      gap:30px;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:white;
+      font-weight:500;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color:#2b1a0f;
+    }
+
+    .logout{
+      padding:8px 18px;
+      background:#2b1a0f;
+      color:white;
+      border:none;
+      border-radius:20px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .logout:hover{
+      background:#000;
+    }
+
+    /* HERO SECTION */
+    .hero{
+      flex:1;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:40px;
+    }
+
+    .hero-card{
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(15px);
+      padding:50px;
+      border-radius:30px;
+      width:90%;
+      max-width:700px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .hero-card h1{
+      font-family:'Pacifico', cursive;
+      font-size:48px;
+      color:white;
+      margin-bottom:15px;
+    }
+
+    .hero-card p{
+      color:white;
+      font-size:18px;
+      margin-bottom:25px;
+    }
+
+    .btn{
+      padding:12px 25px;
+      background:#4d2c16;
+      color:white;
+      border:none;
+      border-radius:25px;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.3s;
+      text-decoration:none;
+      display:inline-block;
+    }
+
+    .btn:hover{
+      background:#2b1a0f;
+      transform:scale(1.05);
+    }
+
+    /* INFO SECTION */
+    .info-section{
+      background:white;
+      padding:60px 20px;
+      text-align:center;
+    }
+
+    .info-card{
+      max-width:800px;
+      margin:auto;
+    }
+
+    .info-card h2{
+      font-size:32px;
+      margin-bottom:20px;
+      color:#4d2c16;
+    }
+
+    .info-card p{
+      font-size:18px;
+      color:#555;
+      line-height:1.6;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="logo">Ride A Pedal</div>
+
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Home</a></li>
+      <li><a href="history.html">History</a></li>
+      <li><a href="reservation.html">Reservation</a></li>
+      <li><a href="payment history">Payment History</a></li>
+      <li><a href="support.html">Support</a></li>
+    </ul>
+
+    <button class="logout">Log out</button>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-card">
+      <h1>Welcome to Ride A Pedal!</h1>
+      <p>Reserve your bike tickets easily and explore beautiful attractions around Manila.</p>
+      <a href="reservation.html" class="btn">Reserve Now</a>
+    </div>
+  </section>
+
+  </div>
+</section>
+
+<!-- LOGOUT SCRIPT -->
+<script>
+  const logoutBtn = document.querySelector('.logout');
+
+  logoutBtn.addEventListener('click', () => {
+    // Clear all stored data
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // Redirect to login page or homepage
+    window.location.href = 'main.html'; // Change to your login page if needed
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Payment History</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #e6b85c, #6b3e1f);
+  padding-bottom: 40px;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: #2b1a0f;
+}
+
+.logout {
+  padding: 8px 18px;
+  background: #2b1a0f;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout:hover {
+  background: black;
+}
+
+/* PAGE TITLE */
+h2 {
+  text-align: center;
+  margin: 40px 0 20px;
+  font-size: 32px;
+  color: white;
+}
+
+/* GLASS TABLE CONTAINER */
+.table-container {
+  width: 95%;
+  max-width: 1100px;
+  margin: auto;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(15px);
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  overflow-x: auto;
+}
+
+/* TABLE */
+.reservation-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+}
+
+.reservation-table th {
+  padding: 15px;
+  background: rgba(0,0,0,0.3);
+  font-weight: 600;
+}
+
+.reservation-table td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.reservation-table tr:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* QR */
+.qr-container img {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+}
+
+/* BUTTON */
+.btn-save {
+  display: inline-block;
+  background: #4d2c16;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.btn-save:hover {
+  background: black;
+  transform: scale(1.05);
+}
+
+/* PAYMENT RECEIPT */
+.payment-receipt {
+  width: 95%;
+  max-width: 1100px;
+  margin: 40px auto 20px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(15px);
+  padding: 30px 40px;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  color: white;
+  display: none; /* hidden until booking */
+}
+
+.payment-receipt h3 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+.receipt-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+.receipt-label {
+  font-weight: 600;
+}
+
+.receipt-value {
+  font-weight: 700;
+}
+
+/* BOOKING BUTTON */
+.book-btn {
+  margin: 20px auto;
+  display: block;
+  background: #4d2c16;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.book-btn:hover {
+  background: black;
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media(max-width:768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .receipt-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .receipt-value {
+    margin-top: 5px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+  <div class="logo">Ride A Pedal</div>
+
+  <ul class="nav-links">
+    <li><a href="dashboard.html">Home</a></li>
+    <li><a href="history.html">History</a></li>
+    <li><a href="reservation.html">Reservation</a></li>
+    <li><a href="Payment history.html">Payment History</a></li>
+    <li><a href="Profile.html">Profile</a></li>
+  </ul>
+
+  <button class="logout" onclick="location.href='index.html'">Log out</button>
+</nav>
+
+<h2>Payment History</h2>
+
+<div class="table-container">
+  <table class="reservation-table" id="reservationTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Bike Type</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>People</th>
+        <th>QR Code</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Existing reservations can stay here -->
+    </tbody>
+  </table>
+</div>
+
+<!-- BOOKING BUTTON SIMULATION -->
+<button class="book-btn" id="bookBtn">Book Reservation</button>
+
+<!-- PAYMENT RECEIPT SECTION -->
+<section class="payment-receipt" id="paymentReceipt" aria-label="Payment Receipt">
+  <h3>Payment Receipt</h3>
+  <div class="receipt-row">
+    <div class="receipt-label">Payment Method:</div>
+    <div class="receipt-value">GCASH</div>
+  </div>
+  <div class="receipt-row">
+    <div class="receipt-label">Amount Paid:</div>
+    <div class="receipt-value">₱450.00</div>
+  </div>
+  <div class="receipt-row">
+    <div class="receipt-label">Date:</div>
+    <div class="receipt-value" id="bookingDateTime"></div>
+  </div>
+  <div class="receipt-row">
+    <div class="receipt-label">Transaction ID:</div>
+    <div class="receipt-value" id="transactionId"></div>
+  </div>
+</section>
+
+<script>
+const bookBtn = document.getElementById('bookBtn');
+const receiptSection = document.getElementById('paymentReceipt');
+const tableBody = document.querySelector('#reservationTable tbody');
+
+function generateTransactionID() {
+  return '#' + Math.random().toString(36).substr(2, 9).toUpperCase();
+}
+
+bookBtn.addEventListener('click', () => {
+  const now = new Date();
+  const options = {
+    year: 'numeric', month: 'long', day: 'numeric',
+    hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
+  };
+  const dateTime = now.toLocaleString('en-US', options);
+
+  // Add reservation to table
+  const row = document.createElement('tr');
+  row.innerHTML = `
+    <td>John Doe</td>
+    <td>johndoe@example.com</td>
+    <td>LUNTIAN 2.0 Touring Bike</td>
+    <td>${now.toLocaleDateString()}</td>
+    <td>${now.toLocaleTimeString()}</td>
+    <td>2</td>
+    <td class="qr-container">
+      <img src="https://via.placeholder.com/100x100?text=QR+Code" alt="QR">
+      <br>
+      <a class="btn-save" href="#" download>Save</a>
+    </td>
+  `;
+  tableBody.appendChild(row);
+
+  // Show receipt
+  document.getElementById('bookingDateTime').textContent = dateTime;
+  document.getElementById('transactionId').textContent = generateTransactionID();
+  receiptSection.style.display = 'block';
+});
+</script>
+
+</body>
+</html>

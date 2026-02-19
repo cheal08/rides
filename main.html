@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIKE NI RACHEL</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: url(backgrounds/bike.jpg) no-repeat center center/cover;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .alert {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    max-width: 90%;
+    text-align: center;
+    z-index: 1000;
+  }
+
+  .alert-success { background-color: #4CAF50; color: white; }
+  .alert-error { background-color: white; color: red; }
+
+  .sidebar {
+    width: 90%;
+    max-width: 400px;
+    background: rgba(136, 82, 0, 0.8); 
+    backdrop-filter: blur(2px);
+    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    padding: 30px 15px;
+  }
+
+  .pedal {
+    background-color: rgba(255,176,85,0.5);
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .sidebar h1 {
+    font-size: 32px;
+    color: black;
+    margin-bottom: 10px;
+  }
+
+  .sidebar h2 {
+    font-size: 18px;
+    color: black;
+  }
+
+  .wrapper {
+    width: 90%;
+    max-width: 400px;
+    background: rgba(199,186,186,0.8);
+    border-radius: 12px;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+  }
+
+  .container {
+    transition: transform 0.2s ease, opacity 0.1s ease;
+  }
+
+  .container.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100%);
+    position: absolute;
+    top: 20px; left: 20px;
+    width: calc(100% - 40px);
+    visibility: hidden;
+  }
+
+  h1 { 
+    text-align: center; 
+    margin-bottom: 20px; 
+    color: rgb(139, 74, 0);
+    font-size: 24px;
+  }
+
+  .input-group { position: relative; margin-bottom: 20px; }
+  .input-group i { position: absolute; left: 10px; top: 12px; color: black; }
+  .input-group input {
+    width: 100%;
+    padding: 12px 12px 12px 35px;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+  }
+  .input-group label {
+    position: absolute;
+    left: 35px;
+    top: 12px;
+    color: black;
+    pointer-events: none;
+    transition: 0.3s;
+    font-size: 14px;
+  }
+  .input-group input:focus + label,
+  .input-group input:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 30px;
+    font-size: 12px;
+    color: rgb(139, 79, 0);
+    background: transparent;
+    padding: 0 5px;
+  }
+
+  .options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
+  .show-password { display: flex; align-items: center; gap: 5px; cursor: pointer; font-size: 12px; }
+  .options a { text-decoration: none; color: rgb(77,31,0); font-size: 12px; }
+
+  .btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #bd6705;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .btn:hover { background: #946603; }
+
+  p { text-align: center; margin-top: 10px; font-size: 12px; }
+  p a { color: rgb(77,31,0); text-decoration: none; cursor: pointer; }
+
+  /* Mobile Responsive */
+  @media(max-width: 480px){
+    .sidebar { width: 95%; padding: 20px; }
+    .sidebar h1 { font-size: 28px; }
+    .sidebar h2 { font-size: 16px; }
+    .wrapper { width: 95%; padding: 15px; }
+    h1 { font-size: 20px; }
+    .btn { font-size: 14px; padding: 10px; }
+    .input-group input { font-size: 13px; padding: 10px 10px 10px 35px; }
+    .input-group label { font-size: 12px; }
+    .options, .show-password { font-size: 10px; }
+    p, .options a { font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="pedal">
+    <h1>𝚁𝙸𝙳𝙴 𝙰 𝙿𝙴𝙳𝙰𝙻</h1>
+    <h2>Bike Reservation<br>Ticketing System</h2>
+  </div>
+</div>
+
+<div class="wrapper">
+  <div class="container" id="signIn">
+    <h1>LOG IN</h1>
+    <form id="loginForm">
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" placeholder=" " required>
+        <label>Email</label>
+      </div>
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" placeholder=" " required>
+        <label>Password</label>
+      </div>
+      <div class="options">
+        <label class="show-password"><input type="checkbox" id="togglePasswordLogin"> Show Password</label>
+        <a href="#" id="forgotPasswordLink">Forgot Password?</a>
+      </div>
+      <input type="submit" value="Log In" class="btn">
+    </form>
+    <p>Don't have an Account? <a id="showSignUp">Sign Up</a></p>
+  </div>
+
+  <div class="container hidden" id="signUp">
+    <h1>SIGN UP</h1>
+    <form id="signupForm">
+      <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" placeholder=" " required>
+        <label>Name</label>
+      </div>
+      <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" placeholder=" " required>
+        <label>Username</label>
+      </div>
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" placeholder=" " required>
+        <label>Email</label>
+      </div>
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" placeholder=" " required>
+        <label>Password</label>
+      </div>
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" placeholder=" " required>
+        <label>Confirm Password</label>
+      </div>
+      <input type="submit" value="Sign Up" class="btn">
+    </form>
+    <p>Already have an Account? <a id="showLogin">Log In</a></p>
+  </div>
+
+  <div class="container hidden" id="forgotPassword">
+    <h1>Forgot Password</h1>
+    <form id="forgotPasswordForm">
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" placeholder=" " required>
+        <label>Enter your Email</label>
+      </div>
+      <input type="submit" value="Send Reset Link" class="btn">
+    </form>
+    <p><a id="backToLogin">Back to Log In</a></p>
+  </div>
+</div>
+
+<script>
+  const signIn = document.getElementById("signIn");
+  const signUp = document.getElementById("signUp");
+  const forgotPassword = document.getElementById("forgotPassword");
+
+  document.getElementById("showSignUp").addEventListener("click", () => {
+    signIn.classList.add("hidden");
+    signUp.classList.remove("hidden");
+  });
+  document.getElementById("showLogin").addEventListener("click", () => {
+    signUp.classList.add("hidden");
+    forgotPassword.classList.add("hidden");
+    signIn.classList.remove("hidden");
+  });
+  document.getElementById("forgotPasswordLink").addEventListener("click", () => {
+    signIn.classList.add("hidden");
+    forgotPassword.classList.remove("hidden");
+  });
+  document.getElementById("backToLogin").addEventListener("click", () => {
+    forgotPassword.classList.add("hidden");
+    signIn.classList.remove("hidden");
+  });
+  document.getElementById("togglePasswordLogin").addEventListener("change", function () {
+    const passwordInput = document.querySelector("#signIn input[type='password']");
+    passwordInput.type = this.checked ? "text" : "password";
+  });
+</script>
+</body>
+</html>
